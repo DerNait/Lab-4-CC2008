@@ -11,7 +11,32 @@ import java.io.*;
 public class Kayak{
 
     public static void main(String[] args){
+        ArrayList<Paquete> usuarios = new ArrayList<Paquete>();
         Scanner scan = new Scanner(System.in);
+
+        try{
+            Scanner fileScan = new Scanner(new File("usuarios.csv"));
+            fileScan.useDelimiter(";");
+
+            if(fileScan.hasNextLine()){//Se salta la linea de titulos
+                fileScan.nextLine();
+            }
+
+            while(fileScan.hasNextLine()){
+                String[] usuariosData = fileScan.nextLine().split(";");
+
+                switch(usuariosData[2]){
+                    case "Basico":
+                        Basico basico = new Basico(usuariosData[0], usuariosData[1]);
+                        usuarios.add(basico);
+                        break;
+                    case "Premium":
+                        Premium premium = new Premium(usuariosData[0], usuariosData[1];);
+                        usuarios.add(premium);
+                        break;
+                }
+            }
+        }
 
         boolean salir = false;//Permite salir del programa
         boolean pass = false;//Sirve para saber si el usuario puede ingresar o no a su cuenta
@@ -78,12 +103,40 @@ public class Kayak{
         }   
     }
 
-    public static void registrarUsuario(){
+    public static void registrarUsuario(ArrayList<Paquete> usuarios){
+        String nombre;
+        String contrasena; 
+        String plan;
+        Scanner scan = new Scanner(System.in);
 
+        System.out.println("\n=== REGISTRO DE USUARIO ===");
+        System.out.println("Registre su nombre");
+        nombre = scan.nextLine();
+        System.out.println("Registre su contraseña");
+        contrasena = scan.nextLine();
+        System.out.println("¿Que plan desea adquirir? 1. Basico, 2. Premium");
+        plan = scan.nextLine();
+        
+        switch(plan){
+            case "1":
+                System.out.println("\nHas escogido plan Basico");
+                Basico basico = new Basico(nombre, contrasena);
+                usuarios.add(basico);
+                System.out.println("Usuario registrado correctamente");
+                break;
+            case "2":
+                System.out.println("\nHas escogido plan Premium");
+                Premium premium = new Premium(nombre, contrasena);
+                usuarios.add(premium);
+                System.out.println("Usuario registrado correctamente");
+                break;
+            default: 
+                System.out.println("Ingrese un valor numerico valido");
+        }
     }
 
     public static void ingresarUsuario(){
-
+        
     }
 
     public static void hacerReserva(){
