@@ -5,11 +5,14 @@ Fecha de creación: 12/11/2023 22:15
 Fecha de ultima modificación: 13/12/2023 9:06
 */
 
+import java.util.ArrayList;
+
 public abstract class Usuario{
 
     protected String nombre;
     protected String contrasena; 
     protected Reserva reserva;
+    protected boolean cambioDeContra = false; //Este atributo es nuevo, ya que si se penso bastante bien pero no tomamos en cuenta la forma en la que hariamos el cambio de contraseña, pero este cambio termino ayudando mas
 
     @Override
     public String toString(){
@@ -37,7 +40,11 @@ public abstract class Usuario{
     }
 
     public String toCSV(){
-        return "";
+        return nombre + ";" + contrasena + ";";
+    }
+
+    public boolean getCambioDeContra() {
+        return cambioDeContra;
     }
 
     public Usuario(String nombre, String contrasena){
